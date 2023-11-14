@@ -1,0 +1,84 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+ /*  border: 1px solid gray; */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+}
+
+.App {
+  background-color: seagreen;
+}
+
+h1 {
+  font-size: 1.2rem;
+  margin-block: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 15vh;
+  padding: .5rem;
+  background-color: brown;
+}
+
+.main-nav {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: yellow;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  min-height: 70vh;
+  padding: .5rem;
+  background-color: gainsboro;
+}
+
+.employee-wrapper {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+button {
+  padding: .5rem 1rem;
+  background-color: brown;
+  border-radius: 10px;
+  border: none;
+}
+
+button:hover {
+  color: gainsboro;
+  cursor: pointer;
+}
+
+input {
+  padding: .5rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 15vh;
+  padding: .5rem;
+  background-color: brown;
+}
