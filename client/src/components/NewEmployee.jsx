@@ -3,17 +3,18 @@ import axios from "axios";
 
 function NewEmployee() {
 
-   const [employee, setEmployee] = useState({
-      name: "",
-      shortName: "",
-   });
+   const defaultEmployee = {
+         name: "",
+         shortName: "",
+   };
+   const [employee, setEmployee] = useState(defaultEmployee);
    const [employees, setEmployees] = useState([]);
    const [error, setError] = useState("");
    const [response, setResponse] = useState("");
 
    useEffect(()=> {
       fetchEmployees();
-   }, []);
+   }, [response]);
 
    const saveEmpleyee = async () => {
       const url = `${process.env.REACT_APP_BACKEND_URL}/new-employee`;
@@ -21,6 +22,7 @@ function NewEmployee() {
          const {data} = await axios.post(url, {employee});
          //console.log(data);
          setResponse(data.msg);
+         setEmployee(defaultEmployee);
       } catch(err) {
          //console.log(err.message);
          setError(err.message);
@@ -31,10 +33,23 @@ function NewEmployee() {
       const url = `${process.env.REACT_APP_BACKEND_URL}/get-employees`;
       try {
          const {data} = await axios.get(url);
-         console.log(data);
+         //console.log(data);
          setEmployees(data);
       } catch(err) {
          console.log(err.message);
+         setEmployees([]);
+         setError(err.message);
+      }
+   }
+
+   const deleteEmployee = async (id) => {
+      const url = `${process.env.REACT_APP_BACKEND_URL}/delete-employee/${id}`;
+      try {
+         const {data} = await axios.delete(url);
+         //console.log(data);
+         setResponse(data.msg);
+      } catch(err) {
+         //console.log(err.message);
          setError(err.message);
       }
    }
@@ -55,6 +70,7 @@ function NewEmployee() {
       const header = <tr>
          <th>Név</th>
          <th>Rövid név</th>
+         <th>Törlés</th>
       </tr>;
       return <thead>{header}</thead>;
    }
@@ -64,6 +80,15 @@ function NewEmployee() {
          <tr key={ind}>
             <td>{item.name}</td>
             <td>{item.shortName}</td>
+            <td>
+               <button 
+                  type="button" 
+                  data-id={item.userId} 
+                  onClick={e=>deleteEmployee(e.target.dataset.id)}
+               >
+                  Törlés
+               </button>
+            </td>
          </tr>
       );
       return <tbody>{rows}</tbody>;

@@ -10,6 +10,7 @@ function Header() {
                <li><Link to={"/"}>Főoldal</Link></li>
                <li><Link to={"/uj-alkalmazott"}>Új alkalmazott</Link></li>
                <li><Link to={"/read-from-drive"}>Beolvasás drive-ról</Link></li>
+               <li><Link to={"/find"}>Keresés</Link></li>
             </ul>
          </nav>
       </header>

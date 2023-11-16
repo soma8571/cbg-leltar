@@ -65,6 +65,15 @@ button {
   border: none;
 }
 
+table {
+  border-collapse: collapse;
+}
+
+table th, td {
+  padding: .5rem;
+  border: 1px solid gray;
+}
+
 button:hover {
   color: gainsboro;
   cursor: pointer;
@@ -72,6 +81,17 @@ button:hover {
 
 input {
   padding: .5rem;
+}
+
+.read-from-drive-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.error {
+  color: red;
 }
 
 .footer {

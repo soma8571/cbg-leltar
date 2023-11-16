@@ -13,7 +13,7 @@ function newEmployee($vars, $body) {
       echo json_encode(['msg' => "Az új alkalmazott felvétele sikeres volt {$lastId} azonosítóval."]);
       return;
    }
-   http_response_code(401);
+   http_response_code(404);
    echo json_encode(['msg' => 'Hiba az alkalmazott felvétele során']);
    return;
 }
@@ -23,13 +23,42 @@ function getEmployees() {
    $query = "SELECT * FROM users";
    $stmt = $pdo->prepare($query);
    $stmt->execute([]);
-   if ($stmt->rowCount()) {
+   if ($stmt->rowCount() > 0) {
       $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
       echo json_encode($data);
       return;
    }
-   http_response_code(401);
+   http_response_code(404);
    echo json_encode(["msg" => "Nincs alkalmazott"]);
+   return;
+}
+
+function deleteEmployee($vars) {
+   $pdo = getConnection();
+   $query = "DELETE FROM users WHERE userId = ?";
+   $stmt = $pdo->prepare($query);
+   $stmt->execute([$vars['id']]);
+   if ($stmt->rowCount() > 0) {
+      echo json_encode(["msg" => "Az alkalmazott törlésre került. ({$vars['id']})"]);
+      return;
+   }
+   http_response_code(404);
+   echo json_encode(["msg" => "Az alkalmazott törlése sikertelen volt."]);
+   return;
+}
+
+function getItems() {
+   $pdo = getConnection();
+   $query = "SELECT * FROM items";
+   $stmt = $pdo->prepare($query);
+   $stmt->execute([]);
+   if ($stmt->rowCount() > 0) {
+      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      echo json_encode($data);
+      return;
+   }
+   http_response_code(404);
+   echo json_encode(["msg" => "Jelenleg nincs leltári elem."]);
    return;
 }
 

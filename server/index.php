@@ -24,8 +24,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) use ($folder) {
     
+    /* Employees */
     $r->addRoute('POST', $folder.'server/new-employee', 'newEmployee');
     $r->addRoute('GET', $folder.'server/get-employees', 'getEmployees');
+    $r->addRoute('DELETE', $folder.'server/delete-employee/{id}', 'deleteEmployee');
+    
+    /* Inventory */
+    $r->addRoute('POST', $folder.'server/new-items', 'saveNewItems');
+    //visszadja az adatbázisban tárolt összes leltári tárgyat
+    $r->addRoute('GET', $folder.'server/get-items', 'getItems');
    
 });
 
