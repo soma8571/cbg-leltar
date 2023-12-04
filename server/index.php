@@ -24,6 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) use ($folder) {
     
+    /* LOGIN */
+    $r->addRoute('POST', $folder.'server/login', 'login');
+
     /* Employees */
     $r->addRoute('POST', $folder.'server/new-employee', 'newEmployee');
     $r->addRoute('GET', $folder.'server/get-employees', 'getEmployees');
@@ -31,8 +34,20 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) u
     
     /* Inventory */
     $r->addRoute('POST', $folder.'server/new-items', 'saveNewItems');
-    //visszadja az adatbázisban tárolt összes leltári tárgyat
+    //visszaadja az adatbázisban tárolt összes leltári tárgyat
     $r->addRoute('GET', $folder.'server/get-items', 'getItems');
+    //visszaadja az összes lehetséges egyedi (leltári tárgyra vonatkozó) állapotot
+    $r->addRoute('GET', $folder.'server/get-status', 'getAllStatus');
+    //visszaadja az összes egyedi hely (place) tulajdonságot
+    $r->addRoute('GET', $folder.'server/get-places', 'getAllPlaces');
+    //visszaadja a paraméterben érkező azonítójú leltári elem összes adatát
+    $r->addRoute('GET', $folder.'server/get-item-data/{id}', 'getItemData');
+    //egy adott leltári elem módosítására szolgáló útvonal
+    $r->addRoute('PATCH', $folder.'server/update-item', 'updateItem');
+    //új leltári tétel mentése
+    $r->addRoute('POST', $folder.'server/save-new-item', 'saveNewItem');
+    //leltári elem törlése
+    $r->addRoute('DELETE', $folder.'server/delete-item/{id}', 'deleteItem');
    
 });
 
@@ -86,6 +101,26 @@ function getConnection() {
     } catch (PDOException $e) {
         echo json_encode(["DB connection error: " => $e->getMessage()]);
     }
-}  
+}
+
+function login($vars, $body) {
+
+    
+    if (isset($body['loginData']['username']) && 
+        $body['loginData']['username'] === "admin" &&
+        isset($body['loginData']['password']) && 
+        $body['loginData']['password'] === "szuperTitkos")
+    {
+        /* setcookie(
+            "loggedIn",
+            true,
+            3600
+        ); */
+        echo json_encode(["msg" => "ok"]);
+        return;
+    }
+    http_response_code(401);
+    echo json_encode(["msg" => "Helytelen bejelentkezési adatok."]);
+}
 
 ?>

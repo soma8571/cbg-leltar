@@ -98,7 +98,7 @@ function NewEmployee() {
     <div className='employee-wrapper'>
       <div>
          <h1>Új alkalmazott felvétel</h1>
-         <form className='form' onSubmit={e=>handleSubmit(e)}>
+         <form className='new-employee-form' onSubmit={e=>handleSubmit(e)}>
             <label htmlFor="name">Teljes név</label>
             <input 
                type="text" 

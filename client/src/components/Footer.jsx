@@ -3,7 +3,9 @@ import React from 'react';
 function Footer() {
   return (
     <div className='footer'>
-      Én vagyok a Footer
+      <div className="created-by">
+        Created by <span className="author">Tamás Somlói</span>
+      </div>
     </div>
   );
 }

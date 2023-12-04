@@ -8,40 +8,56 @@
 }
 
 .App {
-  background-color: seagreen;
+  color: gainsboro;
 }
 
 h1 {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin-block: 1rem;
 }
 
 .header {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   min-height: 15vh;
   padding: .5rem;
-  background-color: brown;
+  background-color: rgb(0, 30, 43);
+}
+
+a {
+  color: crimson;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .main-nav {
   display: flex;
   list-style: none;
-  gap: 1.5rem;
+  gap: 3rem;
 }
 
 .main-nav a {
   text-decoration: none;
-  color: yellow;
+  color: gainsboro;
+  font-size: 1.2rem;
+}
+
+.main-nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: .5rem;
+  color: orangered;
 }
 
 .main {
   display: flex;
   justify-content: center;
   min-height: 70vh;
-  padding: .5rem;
-  background-color: gainsboro;
+  padding: 1rem;
+  background-color: rgb(17, 39, 51);
 }
 
 .employee-wrapper {
@@ -51,36 +67,129 @@ h1 {
   justify-content: center;
 }
 
-.form {
+.data-info {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+  color: gray;
+}
+
+.new-employee-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  grid-template-areas:
+    "keyword property ."
+    "status places user"
+    "submit submit reset";
+  border: 1px solid gray;
+  padding: 1rem;
+}
+
+.form-group:nth-child(1) {
+  grid-area: keyword;
+}
+
+.form-group:nth-child(2) {
+  grid-area: property;
+}
+
+.form-group:nth-child(3) {
+  grid-area: status;
+}
+
+.form-group:nth-child(4) {
+  grid-area: places;
+}
+
+.form-group:nth-child(5) {
+  grid-area: user;
+}
+
+button.submit {
+  grid-area: submit;
+  background-color: crimson;
+}
+
+button.reset {
+  grid-area: reset;
+  background-color: slategray;
+}
+
+button.back {
+  background-color: orangered;
+  background-color: darkorange;
+  background-color: gold;
+  color: black;
+}
+
+.total-find,
+.total-quantity {
+  color: greenyellow
+}
+
+.form-group {
+  display: grid;
   gap: .5rem;
 }
 
 button {
-  padding: .5rem 1rem;
+  padding: 1rem;
   background-color: brown;
   border-radius: 10px;
   border: none;
+  color: gainsboro;
 }
 
 table {
   border-collapse: collapse;
+  border: 1px solid lime;
 }
 
 table th, td {
   padding: .5rem;
-  border: 1px solid gray;
+}
+
+table th {
+  background-color: #003300;
+  color: yellow;
+}
+
+table tr:nth-of-type(odd) {
+  background-color: rgba(17, 39, 51, 0.5);
+  background-color: rgba(0, 30, 43, 1);
 }
 
 button:hover {
-  color: gainsboro;
   cursor: pointer;
 }
 
-input {
+input, select {
   padding: .5rem;
+  background-color: lime;
+  border: none;
+}
+
+.find-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.find-result-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 .read-from-drive-wrapper {
@@ -94,11 +203,103 @@ input {
   color: red;
 }
 
-.footer {
+.editor-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.return-back {
+  align-self: flex-start;
+}
+
+.properties-wrapper {
+  display: grid;
+  gap: 1rem;
+  grid-template-areas: 
+  'name name quantity'
+  'status place place'
+  'responsibleUser responsibilityLevel ownerIsKK'
+  'getInYear getFrom value' 
+  'inventoryNr description description';
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-block: 1rem;
+}
+
+.prop-wrapper {
+  display: grid;
+  gap: .5rem;
+  /* border: 1px solid gray; */
+}
+
+.required {
+  color: crimson;
+}
+
+.update-msg {
+  padding-block: .5rem;
+  color: lime;
+}
+
+.save-error-msg {
+  padding-block: .5rem;
+  color: red;
+}
+
+.login-wrapper {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 2rem;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(0, 30, 43);
+}
+
+.login-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.login-form div {
+  display: grid;
+  gap: .3rem;
+}
+
+.login-form input {
+  padding: 1rem; 
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
   min-height: 15vh;
   padding: .5rem;
-  background-color: brown;
+  background-color: rgb(0, 30, 43);
+}
+
+.created-by {
+  font-size: .8rem;
+}
+
+.author {
+  color: aqua;
+  font-size: .8rem;
+}
+
+@media screen and (width < 700px) {
+  .properties-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 }

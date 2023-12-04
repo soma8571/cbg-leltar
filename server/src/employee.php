@@ -49,7 +49,10 @@ function deleteEmployee($vars) {
 
 function getItems() {
    $pdo = getConnection();
-   $query = "SELECT * FROM items";
+   $query = "SELECT i.*, u.shortName, u.name AS userName
+               FROM items i 
+                  INNER JOIN users u
+               ON i.responsibleUser = u.userId";
    $stmt = $pdo->prepare($query);
    $stmt->execute([]);
    if ($stmt->rowCount() > 0) {
