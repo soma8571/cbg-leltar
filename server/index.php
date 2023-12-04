@@ -7,7 +7,7 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
     header("Access-Control-Allow-Origin: http://localhost:3000");
     $folder = "/cbg-leltar/";
 } else {
-    header("Access-Control-Allow-Origin: http://new.boznanszkykes.hu");
+    header("Access-Control-Allow-Origin: https://cbg.edu.hu");
     $folder = "/";
 }
 
