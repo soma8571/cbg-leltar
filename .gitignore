@@ -1,4 +1,5 @@
 client/node_modules
+client/build
 server/vendor
 server/.htaccess
 client/.env

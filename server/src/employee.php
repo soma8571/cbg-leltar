@@ -47,22 +47,4 @@ function deleteEmployee($vars) {
    return;
 }
 
-function getItems() {
-   $pdo = getConnection();
-   $query = "SELECT i.*, u.shortName, u.name AS userName
-               FROM items i 
-                  INNER JOIN users u
-               ON i.responsibleUser = u.userId";
-   $stmt = $pdo->prepare($query);
-   $stmt->execute([]);
-   if ($stmt->rowCount() > 0) {
-      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      echo json_encode($data);
-      return;
-   }
-   http_response_code(404);
-   echo json_encode(["msg" => "Jelenleg nincs leltári elem."]);
-   return;
-}
-
 ?>
