@@ -214,7 +214,7 @@ function Find() {
 
    function calcTotalQuantity() {
       if (filteredItems.length > 0) {
-         const sum = filteredItems.reduce((sum, current) => sum + current.quantity, 0);
+         const sum = filteredItems.reduce((sum, current) => sum + Number(current.quantity), 0);
          return sum;
       }  
       return 0;
